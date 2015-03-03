@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="SimpleSteps.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SimpleSteps"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="DateLabel" Margin="12,0,12,12" Grid.Row="0" Text="" HorizontalAlignment="Center" FontSize="48.0" />
+        
+        <Grid Grid.Row="1" Margin="12,0,12,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <TextBlock Text="Walk:" Margin="0,0,5,0" FontSize="24.0" Foreground="Yellow" />
+                <TextBlock x:Name="WalkStepsLabel" Text="" FontSize="24.0" Foreground="Yellow"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <TextBlock Text="Run:" Margin="0,0,5,0" FontSize="24.0" Foreground="SkyBlue" />
+                <TextBlock Text="" x:Name="RunStepsLabel" FontSize="24.0" Foreground="SkyBlue" />
+            </StackPanel>
+        </Grid>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Text=" Total Steps:" Margin="0,0,5,0" FontSize="24.0" Foreground="Red" />
+            <TextBlock x:Name="TotalStepsLabel" Text="" FontSize="24.0" Foreground="Red" />
+        </StackPanel>
+        
+        <Rectangle Tapped="Screen_Tapped" Fill="Black" Margin="12,0,12,12" x:Name="GraphBox" Stroke="White" StrokeThickness="2" Grid.Row="3" />
+        <Rectangle Margin="12,0,12,12" Stroke="White" Grid.Row="3" VerticalAlignment="Center" Height="2" />
+        <TextBlock Text="" x:Name="TopLimitLabel" Margin="17,5,12,12" VerticalAlignment="Top" FontSize="18.0" Grid.Row="3" />
+        <TextBlock Text="" x:Name="CenterLimitLabel" Margin="17,30,12,12" VerticalAlignment="Center" FontSize="18.0" Grid.Row="3" />
+        
+        <Path x:Name="walkPath" Margin="12,0,12,12" Grid.Row="3" Stroke="Yellow" StrokeThickness="2">
+            <Path.Data> <PathGeometry> <PathFigureCollection>
+                <PathFigure x:Name="walkGraph" IsClosed="False">
+                    <PathFigure.Segments>
+                        <PathSegmentCollection x:Name="walkGraphSegments" />
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection> </PathGeometry> </Path.Data>
+        </Path>
+        <Path x:Name="runPath" Margin="12,0,12,12" Grid.Row="3" Stroke="SkyBlue" StrokeThickness="2">
+            <Path.Data> <PathGeometry> <PathFigureCollection>
+                <PathFigure x:Name="runGraph" IsClosed="False">
+                    <PathFigure.Segments>
+                        <PathSegmentCollection x:Name="runGraphSegments" />
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection> </PathGeometry> </Path.Data>
+        </Path>
+        <Path x:Name="totalStepsPath" Margin="12,0,12,12" Grid.Row="3" Stroke="Red" StrokeThickness="2">
+            <Path.Data> <PathGeometry> <PathFigureCollection>
+                <PathFigure x:Name="totalStepsGraph" IsClosed="False">
+                    <PathFigure.Segments>
+                        <PathSegmentCollection x:Name="totalStepsGraphSegments" />
+                    </PathFigure.Segments>
+                </PathFigure>
+            </PathFigureCollection> </PathGeometry> </Path.Data>
+        </Path>
+        
+        <Grid Margin="12,0,12,12" Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="00" FontSize="18.0" />
+            <TextBlock Grid.Column="1" Text="06" FontSize="18.0" />
+            <TextBlock Grid.Column="2" Text="12" FontSize="18.0" />
+            <TextBlock Grid.Column="3" Text="18" FontSize="18.0" />
+            <TextBlock Grid.Column="4" Text="24" FontSize="18.0" />
+        </Grid>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="CmdBar" Background="Black" Foreground="White">
+            <AppBarButton Label="PreviousDay" x:Uid="PreviousButton" x:Name="PreviousButton" Icon="Previous" Click="GoToPreviousDay"/>
+            <AppBarButton Label="NextDay" x:Uid="NextButton" x:Name="NextButton" Icon="Next" Click="GoToNextDay"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
